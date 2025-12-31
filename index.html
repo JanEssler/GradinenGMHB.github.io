@@ -1,49 +1,153 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- Zeichensatz -->
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>GardienenGMBH – Subwoofer Einbau</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #111;
+            color: #eee;
+        }
 
-  <!-- Mobile Optimierung -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        header {
+            background: linear-gradient(135deg, #8b0000, #000);
+            padding: 40px 20px;
+            text-align: center;
+        }
 
-  <!-- Titel im Browser-Tab -->
-  <title>Meine GitHub Page</title>
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+        }
 
-  <!-- Verbindung zur CSS-Datei -->
-  <link rel="stylesheet" href="style.css">
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        section {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h2 {
+            color: #ff4444;
+        }
+
+        .card {
+            background: #1c1c1c;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #ff2222;
+        }
+
+        footer {
+            background: #000;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+    </style>
 </head>
-
 <body>
 
-  <!-- Kopfbereich -->
-  <header>
-    <h1>Willkommen auf meiner Website</h1>
-    <p>Diese Seite wird kostenlos mit GitHub Pages gehostet.</p>
-  </header>
+<header>
+    <h1>GardienenGMBH</h1>
+    <p>Professioneller Subwoofer-Einbau für dein Auto</p>
+</header>
 
-  <!-- Hauptinhalt -->
-  <main>
-    <section>
-      <h2>Über mich</h2>
-      <p>
-        Hallo! Das ist meine erste eigene Website.
-        Ich lerne gerade GitHub Pages.
-      </p>
-    </section>
+<section>
+    <h2>Über uns</h2>
+    <div class="card">
+        <p>
+            Die <strong>GardienenGMBH</strong> ist eine (natürlich völlig echte 😎) Spaßfirma,
+            die sich auf hochwertigen Subwoofer-Einbau in Autos spezialisiert hat.
+            Von dezentem Bass bis erdbebensicher – wir bringen dein Fahrzeug zum Beben.
+        </p>
+    </div>
+</section>
 
-    <section>
-      <h2>Kontakt</h2>
-      <p>
-        E-Mail: <a href="mailto:deinname@email.de">deinname@email.de</a>
-      </p>
-    </section>
-  </main>
+<section>
+    <h2>Unsere Leistungen</h2>
+    <div class="card">
+        <ul>
+            <li>Subwoofer-Einbau in PKW & Transporter</li>
+            <li>Optimale Abstimmung von Bass & Verstärker</li>
+            <li>Kabelverlegung & Dämmung</li>
+            <li>Individuelle Beratung (inkl. Nachbarn-Warnung)</li>
+        </ul>
+    </div>
+</section>
 
-  <!-- Fußzeile -->
-  <footer>
-    <p>© 2025 Dein Name</p>
-  </footer>
+<section>
+    <h2>🔊 Subwoofer-Test-Sound</h2>
+    <div class="card">
+        <p>
+            Teste hier einen tiefen Bass-Sound.  
+            <strong>Achtung:</strong> Lautsprecher & Nachbarn könnten überrascht sein.
+        </p>
+
+        <button onclick="playBass()">Bass abspielen</button>
+        <button onclick="stopBass()">Bass stoppen</button>
+    </div>
+</section>
+
+<footer>
+    © 2025 GardienenGMBH – Mehr Bass braucht kein Mensch, aber jeder will ihn.
+</footer>
+
+<script>
+    let audioContext;
+    let oscillator;
+    let gainNode;
+
+    function playBass() {
+        if (!audioContext) {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        oscillator = audioContext.createOscillator();
+        gainNode = audioContext.createGain();
+
+        oscillator.type = "sine";      // schöner tiefer Bass
+        oscillator.frequency.value = 40; // 40 Hz Subwoofer-Testfrequenz
+
+        gainNode.gain.value = 0.4;
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        oscillator.start();
+    }
+
+    function stopBass() {
+        if (oscillator) {
+            oscillator.stop();
+            oscillator.disconnect();
+            oscillator = null;
+        }
+    }
+</script>
 
 </body>
 </html>
